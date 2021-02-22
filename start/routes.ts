@@ -24,4 +24,7 @@ Route.post('/register', 'AuthController.register')
 Route.post('/login', 'AuthController.login')
 Route.post('/logout', 'AuthController.logout')
 
-Route.get('/me', 'UsersController.me').middleware('auth')
+Route.get('/me', 'UsersController.me')
+
+Route.get('/rooms', 'RoomsController.index')
+Route.post('/rooms', 'RoomsController.create')

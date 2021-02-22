@@ -1,9 +1,13 @@
 import test from 'japa'
-import { post } from './helpers'
+import { post, runMigrations } from './helpers'
 
-test.group('Auth', () => {
+test.group('Auth', (group) => {
   const email = 'test@email.cz'
   const password = 'password'
+
+  group.before(async () => {
+    await runMigrations()
+  })
 
   test('user can register', async (assert) => {
     const { body } = await post('/register', { email, password, password_confirmation: password })

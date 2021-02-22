@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
-import { column, beforeSave, BaseModel } from '@ioc:Adonis/Lucid/Orm'
+import { column, beforeSave, BaseModel, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
+import Room from './Room'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -20,6 +21,9 @@ export default class User extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @hasMany(() => Room, { foreignKey: 'ownerId' })
+  public rooms: HasMany<typeof Room>
 
   @beforeSave()
   public static async hashPassword(user: User) {
