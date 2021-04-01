@@ -2,7 +2,6 @@ import { join } from 'path'
 import getPort from 'get-port'
 import { configure } from 'japa'
 import sourceMapSupport from 'source-map-support'
-import Database from '@ioc:Adonis/Lucid/Database'
 
 process.env.NODE_ENV = 'testing'
 process.env.DB_CONNECTION = 'sqlite_testing'
