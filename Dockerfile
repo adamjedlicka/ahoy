@@ -2,7 +2,7 @@ FROM node:15-alpine
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
+COPY package*.json ./
 
 RUN npm install
 
@@ -14,8 +14,10 @@ FROM node:15-alpine
 
 WORKDIR /app
 
-COPY --from=0 /app/build .
+COPY --from=0 /app/build/package*.json ./
 
 RUN npm ci --production
+
+COPY --from=0 /app/build .
 
 CMD node server.js
