@@ -1,16 +1,16 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
-export default class Rooms extends BaseSchema {
-  protected tableName = 'rooms'
+export default class Messages extends BaseSchema {
+  protected tableName = 'messages'
 
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.string('name').notNullable()
-      table.integer('owner_id').notNullable()
+      table.text('text').notNullable()
+      table.integer('user_id').notNullable()
       table.timestamps(true)
 
-      table.foreign('owner_id').references('id').inTable('users')
+      table.foreign('user_id').references('id').inTable('users')
     })
   }
 

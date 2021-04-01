@@ -5,8 +5,9 @@ import User from 'App/Models/User'
 export default class AuthController {
   public async register({ request }: HttpContextContract) {
     const validationSchema = schema.create({
-      email: schema.string({ trim: true }, [rules.email(), rules.unique({ table: 'users', column: 'email' })]),
+      username: schema.string({ trim: true }, [rules.unique({ table: 'users', column: 'username' })]),
       password: schema.string({ trim: true }, [rules.confirmed()]),
+      name: schema.string({ trim: true }),
     })
 
     const userDetails = await request.validate({
@@ -19,10 +20,10 @@ export default class AuthController {
   }
 
   public async login({ request, auth }: HttpContextContract) {
-    const email = request.input('email')
+    const username = request.input('username')
     const password = request.input('password')
 
-    const token = await auth.attempt(email, password)
+    const token = await auth.attempt(username, password)
 
     return token.toJSON()
   }

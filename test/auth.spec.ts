@@ -2,22 +2,25 @@ import test from 'japa'
 import { post, runMigrations } from './helpers'
 
 test.group('Auth', (group) => {
-  const email = 'test@email.cz'
+  const username = 'username'
   const password = 'password'
+  const name = 'name'
 
   group.before(async () => {
     await runMigrations()
   })
 
   test('user can register', async (assert) => {
-    const { body } = await post('/register', { email, password, password_confirmation: password })
+    const { ok, body } = await post('/register', { username, password, password_confirmation: password, name })
 
-    assert.equal(body.email, email)
+    assert.isTrue(ok)
+    assert.equal(body.username, username)
   })
 
   test('registered user can log in', async (assert) => {
-    const { body } = await post('/login', { email, password })
+    const { ok, body } = await post('/login', { username, password })
 
+    assert.isTrue(ok)
     assert.isString(body.token)
   })
 })
