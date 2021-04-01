@@ -38,7 +38,7 @@ const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
     sqlite: {
       client: 'sqlite',
       connection: {
-        filename: Application.tmpPath('db.sqlite'),
+        filename: Application.databasePath('db.sqlite'),
       },
       useNullAsDefault: true,
       healthCheck: false,
@@ -48,7 +48,7 @@ const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
     sqlite_testing: {
       client: 'sqlite',
       connection: {
-        filename: Application.tmpPath('db_testing.sqlite'),
+        filename: Application.databasePath('db_testing.sqlite'),
       },
       useNullAsDefault: true,
       healthCheck: false,
