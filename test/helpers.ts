@@ -1,3 +1,4 @@
+import User from 'App/Models/User'
 import execa from 'execa'
 import supertest from 'supertest'
 
@@ -23,16 +24,25 @@ export const post = async (route, body, { token = null } = {}) => {
   return await request
 }
 
-export const login = async ({ username, password }) => {
-  const { body } = await supertest(BASE_URL).post('/login').send({
-    username,
-    password,
+export const login = async (opts) => {
+  await User.create({
+    name: 'name',
+    ...opts,
   })
+
+  const { body } = await supertest(BASE_URL)
+    .post('/login')
+    .send({
+      ...opts,
+    })
 
   return body.token
 }
 
 export const runMigrations = async () => {
+  process.stdout.write('Migrating... ')
+  console.time('done')
   await execa.node('ace', ['migration:rollback'])
   await execa.node('ace', ['migration:run'])
+  console.timeEnd('done')
 }

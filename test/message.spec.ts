@@ -1,4 +1,3 @@
-import User from 'App/Models/User'
 import test from 'japa'
 import { login, get, post, runMigrations } from './helpers'
 
@@ -10,16 +9,7 @@ test.group('Message', (group) => {
   group.before(async () => {
     await runMigrations()
 
-    const username = 'username'
-    const password = 'password'
-
-    await User.create({
-      username,
-      password,
-      name: 'name',
-    })
-
-    token = await login({ username, password })
+    token = await login({ username: 'username', password: 'password' })
   })
 
   test('message can be created', async (assert) => {
