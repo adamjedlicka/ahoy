@@ -4,8 +4,7 @@ services:
   app:
     build: .
     volumes:
-      - /app
-      - /app/node_modules
+      - /app/database
     ports:
       - 3333:3333
     environment:

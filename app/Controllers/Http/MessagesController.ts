@@ -19,6 +19,8 @@ export default class MessagesController {
       ...request.only(['text']),
     })
 
+    await message.preload('user')
+
     const response = message.toJSON()
 
     Ws.io.emit('message', response)
