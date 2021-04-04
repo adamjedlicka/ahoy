@@ -4,7 +4,7 @@ import Message from 'App/Models/Message'
 
 export default class MessagesController {
   public async index({}: HttpContextContract) {
-    const messages = await Message.all()
+    const messages = await Message.query().preload('user')
 
     return {
       messages,

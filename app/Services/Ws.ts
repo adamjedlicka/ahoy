@@ -6,7 +6,12 @@ class Ws {
   public io: socketIo.Server
 
   public start() {
-    this.io = (socketIo as any)(Server.instance!)
+    this.io = (socketIo as any)(Server.instance!, {
+      cors: {
+        origin: '*',
+        methods: ['GET', 'POST'],
+      },
+    })
     this.isReady = true
   }
 }
