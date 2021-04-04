@@ -38,6 +38,7 @@
     "phc-bcrypt": "^1.0.5",
     "proxy-addr": "^2.0.6",
     "reflect-metadata": "^0.1.13",
+    "socket.io": "^4.0.1",
     "source-map-support": "^0.5.19",
     "sqlite3": "^5.0.2"
   }
